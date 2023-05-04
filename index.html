@@ -1,0 +1,57 @@
+<!-- Сообщаем браузеру как стоит обрабатывать эту страницу -->
+<!DOCTYPE html>
+<!-- Оболочка документа, указываем язык содержимого -->
+<html lang="ru">
+<!-- Заголовок страницы, контейнер для других важных данных (не отображается) -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Рандомайзер</title>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div class="container">
+			<section class="randomizer">
+				<h1 class="randomizer__header">Рандомайзер</h1>
+				<div class="randomizer__wrapper">
+					<div class="randomizer__introduction">
+						<p class="randomizer__subtitle">Введите минимальное и максимальное значение и получите случайное
+							число
+							из этого диапазона!</p>
+					</div>
+					<div class="randomizer__main">
+						<div class="randomizer__block">
+							<p class="randomizer__label">
+								Минимальное значение
+							</p>
+							<input class="randomizer__input _minValue" value="0" type="text">
+						</div>
+						<div class="randomizer__block">
+							<p class="randomizer__label">
+								Максимальное значение
+							</p>
+							<input class="randomizer__input _maxValue" value="0" type="text">
+						</div>
+						<div class="randomizer__block">
+							<input type="button" class="randomizer__start" value="Начать">
+						</div>
+					</div>
+					<div class="randomizer__bottom">
+						<p class="randomizer__label">
+							Результат:
+						</p>
+						<div class="randomizer__result">0</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="js/script.js"></script>
+</body>
+
+</html>

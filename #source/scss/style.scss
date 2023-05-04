@@ -1,0 +1,158 @@
+// Файл обнуляющих стилей
+@import "nullstyle.scss";
+
+// <АДАПТИВНОЕ СВОЙСТВО> =============================================================================
+$maxWidth: 1920;
+$maxWidthContainer: 1170;
+
+@mixin adaptiv-value ($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+
+	@if $type ==1 {
+		//Только если меньше контейнера
+		#{$property}: $startSize + px;
+
+		@media (max-width : #{$maxWidthContainer + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+		}
+	}
+
+	@else if $type ==2 {
+		//Только если больше контейнера
+		#{$property}: $startSize + px;
+
+		@media (min-width: #{$maxWidthContainer + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+		}
+	}
+
+	@else {
+		//Всегда
+		#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+	}
+}
+
+// <ПЕРЕВОДЫ МЕЖДУ ЕДИНИЦАМИ ИЗМЕРЕНИЯ>=================================================
+// В %
+
+
+@function prc($pxOne, $pxTwo) {
+	$result: ($pxOne/$pxTwo) * 100%;
+	@return $result;
+}
+
+//REM
+@function rem($px) {
+	$result: ($px/16)+rem;
+	@return $result;
+}
+
+//EM
+@function em($px) {
+	$result: ($px / 16)+em;
+	@return $result;
+}
+
+body,
+html {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background: linear-gradient(45deg, rgb(18, 18, 151), rgb(255, 144, 163));
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.container {
+	max-width: 970px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.randomizer {
+	text-align: center;
+
+	&__header {
+		text-transform: uppercase;
+		letter-spacing: em(4);
+		font-weight: 600;
+		background: linear-gradient(90deg, rgb(254, 254, 254) 30%, rgb(255, 127, 225));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		@include adaptiv-value('font-size', 28, 22, 1);
+	}
+
+	&__wrapper {
+		margin: 0 auto;
+		@include adaptiv-value('margin-top', 50, 30, 1);
+		color: #ffffff;
+
+	}
+
+	&__subtitle {
+		max-width: 500px;
+		margin: 0 auto;
+		@include adaptiv-value('font-size', 28, 18, 1);
+		line-height: em(20);
+		font-weight: 600;
+	}
+
+	&__main {
+		@include adaptiv-value('margin-top', 50, 30, 1);
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__block {
+		flex: 1 1 50%;
+	}
+
+	&__label {
+		@include adaptiv-value('font-size', 22, 18, 1);
+		@include adaptiv-value('letter-spacing', 0.5, 0, 1);
+		font-weight: 500;
+	}
+
+	&__input {
+		width: 100px;
+		height: 30px;
+		margin-top: 15px;
+		@include adaptiv-value('margin-bottom', 50, 30, 1);
+		border-radius: 20px;
+		text-align: center;
+	}
+
+	&__start {
+		width: 100px;
+		height: 40px;
+		cursor: pointer;
+		background-color: #ffffff54;
+		font-size: rem(16);
+		text-transform: uppercase;
+		border-radius: em(7);
+		transition: all 0.3s ease 0s;
+		color: #fff;
+
+
+		@media(any-hover:hover) {
+			&:hover {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+	}
+
+	&__bottom {
+		@include adaptiv-value('margin-top', 50, 30, 1);
+	}
+
+	&__result {
+		@include adaptiv-value('margin-top', 10, 5, 1);
+		@include adaptiv-value('font-size', 60, 50, 1);
+	}
+}
